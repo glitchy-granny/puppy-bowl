@@ -11,12 +11,14 @@ function App() {
         console.log(result);
       });*/
 
-  createPlayer({
-    name: "Anise",
-    breed: "Australian Cattle Dog / Labrador Retriever",
-  }).then((newPlayer) => {
-    console.log(newPlayer);
-  });
+  useEffect(() => {
+    createPlayer({
+      name: "Anise",
+      breed: "Australian Cattle Dog / Labrador Retriever",
+    }).then((newPlayer) => {
+      console.log(newPlayer);
+    });
+  }, []);
 
   return <></>;
 }

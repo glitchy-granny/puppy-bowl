@@ -3,8 +3,7 @@ const API_URL =
 
 export async function getPlayers() {
   try {
-    const response = await fetch(
-      `${API_URL}/players`);
+    const response = await fetch(`${API_URL}/${players}`);
     const result = await response.json();
     return result.data.players;
   } catch (error) {
@@ -14,27 +13,48 @@ export async function getPlayers() {
 
 export async function getPlayer(playerId) {
   try {
-    const response = await fetch(`${API_URL}/players/${playerId}`
-  );
+    const response = await fetch(`${API_URL}/players/${playerId}`);
     const result = await response.json();
     return result.data.player;
   } catch (error) {
     console.error(error);
   }
+}
 
- }
+export async function createPlayer(player) {
+  try {
+    const response = await fetch(`${API_URL}/${player}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
 
-  export async function createPlayer(player) {
-    try {
-      const response = await fetch(`${API_URL}/${players}`,
-    {
-        method: "POST"
-        body: JSON.stringify({player})
+      body: JSON.stringify(player),
     });
-      const result = await response.json();
-      return result.data.newPlayer;
-    } catch (error) {
-      console.error(error);
-    }
-
+    const result = await response.json();
+    return result.data.newPlayer;
+  } catch (error) {
+    console.error(error);
   }
+}
+
+export async function deletePlayer(playerId) {
+  try {
+    const response = await fetch(`${API_URL}/players/${playerId}`, {
+      method: "DELETE",
+    });
+    await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getTeams() {
+  try {
+    const response = await fetch(`${API_URL}$/teams`);
+    const result = await response.json();
+    return result.data.teams;
+  } catch (error) {
+    console.error(error);
+  }
+}
