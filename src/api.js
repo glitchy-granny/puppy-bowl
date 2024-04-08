@@ -3,10 +3,38 @@ const API_URL =
 
 export async function getPlayers() {
   try {
-    const response = await fetch("${API_URL}/players");
+    const response = await fetch(
+      `${API_URL}/players`);
     const result = await response.json();
     return result.data.players;
   } catch (error) {
     console.error(error);
   }
 }
+
+export async function getPlayer(playerId) {
+  try {
+    const response = await fetch(`${API_URL}/players/${playerId}`
+  );
+    const result = await response.json();
+    return result.data.player;
+  } catch (error) {
+    console.error(error);
+  }
+
+ }
+
+  export async function createPlayer(player) {
+    try {
+      const response = await fetch(`${API_URL}/${players}`,
+    {
+        method: "POST"
+        body: JSON.stringify({player})
+    });
+      const result = await response.json();
+      return result.data.newPlayer;
+    } catch (error) {
+      console.error(error);
+    }
+
+  }

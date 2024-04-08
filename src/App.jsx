@@ -1,25 +1,24 @@
 import { useState, useEffect } from "react";
-import { getPlayers } from "./api";
+import { createPlayer } from "./api";
 import "./index.css";
 
 function App() {
   const [count, setCount] = useState(0);
-
-  useEffect(() => {
+  /*useEffect(() => {
     fetch()
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-      });
+      });*/
 
-    getPlayers().then((players) => console.log(players));
-    async function getallPlayers() {
-      const players = await getPlayers();
-      console.log(players);
-    }
-
-    getallPlayers();
-  }, []);
+  createPlayer({
+    name: "Anise",
+    breed: "Australian Cattle Dog / Labrador Retriever",
+  }).then((newPlayer) => {
+    console.log(newPlayer);
+  });
 
   return <></>;
 }
+
+export default App;
