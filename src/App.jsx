@@ -1,26 +1,39 @@
 import { useState, useEffect } from "react";
-import { createPlayer } from "./api";
+import { createPlayer, getPlayers } from "./api";
 import "./index.css";
+import PlayerCard from "./PlayerCard";
 
 function App() {
-  const [count, setCount] = useState(0);
-  /*useEffect(() => {
-    fetch()
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-      });*/
+  const [players, setPlayers] = useState([]);
 
-  useEffect(() => {
-    createPlayer({
-      name: "Anise",
-      breed: "Australian Cattle Dog / Labrador Retriever",
-    }).then((newPlayer) => {
+  const createNewplayer = (player) => {
+    createPlayer(player).then((newPlayer) => {
       console.log(newPlayer);
     });
+  };
+
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      const serverPlayers = await getPlayers();
+      setPlayers(serverPlayers);
+    };
+
+    fetchPlayers();
   }, []);
 
-  return <></>;
+  return (
+    <>
+      {players.map((player) => {
+        return (
+          <PlayerCard
+            key={player.id}
+            name={player.name}
+            imageUrl={player.imageUrl}
+          />
+        );
+      })}
+    </>
+  );
 }
 
 export default App;
